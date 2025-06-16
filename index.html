@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Una pregunta importante</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8cddb;
+      overflow-x: hidden;
+    }
+
+    header {
+      position: relative;
+      text-align: center;
+      color: hotpink;
+    }
+
+    header img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+
+    header h1 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3em;
+      margin: 0;
+    }
+
+    .imagen-central {
+      display: block;
+      margin: 30px auto;
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .textos {
+      text-align: center;
+      color: #c9184a;
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    .mensaje-fijo {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: #ffdee9;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 0.9em;
+      color: #c9184a;
+      font-weight: bold;
+    }
+
+    #pregunta {
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background-color: #28a745;
+      color: white;
+      left: 40%;
+      top: 850px;
+    }
+
+    #noBtn {
+      background-color: #dc3545;
+      color: white;
+      left: 55%;
+      top: 850px;
+    }
+
+    #respuestaFinal {
+      text-align: center;
+      margin-top: 60px;
+      display: none;
+    }
+
+    .cuadro {
+      background-color: #ffe9ec;
+      padding: 20px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    textarea {
+      width: 90%;
+      height: 80px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      font-size: 1em;
+      resize: none;
+    }
+
+    #mensajeResultado {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 15px;
+      border: 2px dashed #ff69b4;
+      color: #c9184a;
+      font-size: 1.1em;
+    }
+
+    #respuestaNo {
+      display: none;
+      text-align: center;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="love fondo.jpg" alt="Fondo romántico">
+    <h1>Una pregunta importante 💕</h1>
+  </header>
+
+  <img src="sobre love.jpg" alt="Imagen central" class="imagen-central">
+
+  <div class="textos">Alguna vez has pensado en el futuro de nuestra relación?</div>
+  <div class="textos">Si estaremos juntos para siempre, hasta que la death nos separe?</div>
+  <div class="textos">SI tu y yo caminemos juntos por el comino de la vida?</div>
+  <div class="textos">Incluso envejecer juntos jaja</div>
+  <div class="textos">Todas esas preguntas se responden con una sola pregunta:</div>
+
+  <div id="pregunta">
+    <h2>¿Quieres estar conmigo para siempre? 💖</h2>
+    <button id="yesBtn">Sí</button>
+    <button id="noBtn">No</button>
+  </div>
+
+  <div class="mensaje-fijo" id="mensajeFijo">🙂</div>
+
+  <div id="respuestaFinal">
+    <div class="cuadro">
+      <h3>¡Sabía que dirías que sí! 🥰</h3>
+      <h3>Te prometo que te haré la chica más feliz del mundo</h3>
+      <p>Ahora dime...</p>
+      <label><strong>¿Tienes algo bonito para decir?</strong></label><br>
+      <textarea id="mensaje1" placeholder="Escríbelo aquí..."></textarea><br><br>
+
+      <label><strong>¿Que tal un momazo?</strong></label><br>
+      <textarea id="mensaje2" placeholder="Aquí puedes poner algo extra..."></textarea><br><br>
+
+      <button onclick="mostrarRespuesta()">Enviar</button>
+    </div>
+
+    <div id="mensajeResultado" class="cuadro" style="display: none;"></div>
+    <p style="text-align: center; color: #c9184a;"><strong>💌 Envíame una captura de esta parte 💌</strong></p>
+  </div>
+
+  <div id="respuestaNo">
+    <div class="cuadro">
+      <h3>😢 ¿Por qué no?</h3>
+      <p>No quiero obligarte, pero me gustaría saber por qué.</p>
+      <label><strong>Tu motivo:</strong></label><br>
+      <textarea id="motivoNo" placeholder="Escribe aquí por qué dirías que no..."></textarea><br><br>
+    </div>
+    <p style="text-align: center; color: #c9184a;"><strong>📸 Si llegaste hasta aquí... mándame una captura </strong></p>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const mensajeFijo = document.getElementById('mensajeFijo');
+    const respuestaFinal = document.getElementById('respuestaFinal');
+    const respuestaNo = document.getElementById('respuestaNo');
+    const mensajes = [
+      "Sigue intentando 🗣️",
+      "No podrás alcanzarlo 🥺",
+      "Estaremos aquí todo el día 💀💀🔥",
+      "¡Casi lo tocas! 😦‼️",
+      "Porque quieres decir que NO?😢"
+    ];
+
+    let mensajeIndex = 0;
+    let acercamientos = 0;
+
+    noBtn.addEventListener('mouseover', () => {
+      const randomX = Math.random() * (window.innerWidth - 120);
+      const randomY = Math.random() * (window.innerHeight - 70);
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+
+      mensajeFijo.textContent = mensajes[mensajeIndex];
+      mensajeIndex = (mensajeIndex + 1) % mensajes.length;
+
+      acercamientos++;
+      if (acercamientos === 15) {
+        respuestaNo.style.display = "block";
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      }
+    });
+
+    yesBtn.addEventListener('click', () => {
+      respuestaFinal.style.display = "block";
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    });
+
+    function mostrarRespuesta() {
+      const mensaje1 = document.getElementById('mensaje1').value;
+      const mensaje2 = document.getElementById('mensaje2').value;
+
+      const resultado = document.getElementById('mensajeResultado');
+      resultado.innerHTML = `
+        <h3>💌 Tus palabras 💌</h3>
+        <p><strong>Lo que dijiste:</strong> ${mensaje1 || "(No escribiste nada)"}</p>
+        <p><strong>Y el momazo :v:</strong> ${mensaje2 || "(Nada más por ahora)"}</p>
+      `;
+      resultado.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
